@@ -8,10 +8,17 @@
 
 import WatchKit
 import Foundation
-
+import Alamofire
 
 class InterfaceController: WKInterfaceController {
 
+    @IBOutlet var label1: WKInterfaceLabel!
+    @IBAction func button1() {
+        
+        //getJSON(tick: "ethereum")
+        getJSON(tick: "neo")
+       // label1.setText("Fuck you")
+    }
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -27,5 +34,18 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-
-}
+    
+    func getJSON(tick: String) {
+        let url = "https://api.coinmarketcap.com/v1/ticker/" + tick
+        Alamofire.request(url, encoding: JSONEncoding.default)
+            .responseJSON { response in
+                //to get JSON return value
+                if let result = response.result.value {
+                     let JSON = result as! [[String:Any]]
+                    print(JSON[0]["price_usd"])
+                    let price = JSON[0]["price_usd"]
+                    self.label1.setText(String(describing: price))
+                }
+        }
+        }
+    }

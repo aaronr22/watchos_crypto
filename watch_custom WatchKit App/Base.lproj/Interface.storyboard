@@ -14,15 +14,25 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watch_custom_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <button width="1" alignment="left" title="Button" id="SXm-ph-dd9">
-                            <connections>
-                                <action selector="button1" destination="AgC-eL-Hgc" id="QkJ-E5-qhq"/>
-                            </connections>
-                        </button>
-                        <label alignment="left" text="Label" id="4eQ-Jl-zfC"/>
+                        <table alignment="left" id="Loy-H9-qUx">
+                            <items>
+                                <tableRow identifier="row" id="4VE-Qc-U5y" customClass="rowController" customModule="watch_custom_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="PPe-ll-hkv">
+                                        <items>
+                                            <label width="46" height="42" alignment="left" text="Label" id="b99-AT-rnf"/>
+                                            <label width="67" height="41" alignment="right" text="Label" id="vB5-2o-pfA"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="rowLabel" destination="vB5-2o-pfA" id="DFf-mg-5Zs"/>
+                                        <outlet property="rowSymbol" destination="b99-AT-rnf" id="nHh-Wb-gGx"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
                     </items>
                     <connections>
-                        <outlet property="label1" destination="4eQ-Jl-zfC" id="ZPJ-zV-Aqh"/>
+                        <outlet property="tableOutlet" destination="Loy-H9-qUx" id="UhA-kW-aJf"/>
                     </connections>
                 </controller>
             </objects>

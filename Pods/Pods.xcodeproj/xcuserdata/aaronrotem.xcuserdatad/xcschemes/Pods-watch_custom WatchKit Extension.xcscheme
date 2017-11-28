@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "086B0E37C8DC9802290B53355CEEF68D"
+               BlueprintIdentifier = "3AEA26CD3AC74FCD1EF2E57CEF46179D"
                BuildableName = "Pods_watch_custom_WatchKit_Extension.framework"
                BlueprintName = "Pods-watch_custom WatchKit Extension"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "086B0E37C8DC9802290B53355CEEF68D"
+            BlueprintIdentifier = "3AEA26CD3AC74FCD1EF2E57CEF46179D"
             BuildableName = "Pods_watch_custom_WatchKit_Extension.framework"
             BlueprintName = "Pods-watch_custom WatchKit Extension"
             ReferencedContainer = "container:Pods.xcodeproj">

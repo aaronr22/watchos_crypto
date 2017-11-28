@@ -27,7 +27,8 @@ target 'watch_custom WatchKit App' do
   use_frameworks!
 
   # Pods for watch_custom WatchKit App
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.5.1'
+
 
 end
 

@@ -22,6 +22,7 @@
 		2F2FFBA61FCA4C8E005A36E3 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FFBA51FCA4C8E005A36E3 /* ExtensionDelegate.swift */; };
 		2F2FFBA81FCA4C8E005A36E3 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FFBA71FCA4C8E005A36E3 /* NotificationController.swift */; };
 		2F2FFBAA1FCA4C8E005A36E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2FFBA91FCA4C8E005A36E3 /* Assets.xcassets */; };
+		2F6A4E131FCBD335003469F8 /* rowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6A4E121FCBD335003469F8 /* rowController.swift */; };
 		440828C23C1B705E2BB6A124 /* Pods_watch_custom_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018587E4697710FC7D77569B /* Pods_watch_custom_WatchKit_Extension.framework */; };
 		533094CC00F51ACCD76BB05B /* Pods_watch_custom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE6FEDC0CFFE79C9EDEF39B /* Pods_watch_custom.framework */; };
 		710968780882B91B005F60DB /* Pods_watch_customUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF31F39899439CF2EF31537 /* Pods_watch_customUITests.framework */; };
@@ -113,6 +114,11 @@
 		2F2FFBA91FCA4C8E005A36E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F2FFBAB1FCA4C8E005A36E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F2FFBAC1FCA4C8E005A36E3 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		2F6A4E121FCBD335003469F8 /* rowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rowController.swift; sourceTree = "<group>"; };
+		2F9C98C21FCD388000BE8DC0 /* watch_custom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = watch_custom.entitlements; sourceTree = "<group>"; };
+		2F9C98C31FCD397500BE8DC0 /* watch_custom WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watch_custom WatchKit App.entitlements"; sourceTree = "<group>"; };
+		2F9C98C41FCD397E00BE8DC0 /* watch_custom WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watch_custom WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		2F9C98C51FCD39EB00BE8DC0 /* watch_custom WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watch_custom WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		307377BC9C7AC722E52E52D0 /* Pods_watch_customTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watch_customTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD16D604544E25963D757D9 /* Pods_watch_custom_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watch_custom_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A019C5007E40E0262E3CDB06 /* Pods-watch_customUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watch_customUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-watch_customUITests/Pods-watch_customUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -229,12 +235,14 @@
 		2F2FFB691FCA4C8E005A36E3 /* watch_custom */ = {
 			isa = PBXGroup;
 			children = (
+				2F9C98C21FCD388000BE8DC0 /* watch_custom.entitlements */,
 				2F2FFB6A1FCA4C8E005A36E3 /* AppDelegate.swift */,
 				2F2FFB6C1FCA4C8E005A36E3 /* ViewController.swift */,
 				2F2FFB6E1FCA4C8E005A36E3 /* Main.storyboard */,
 				2F2FFB711FCA4C8E005A36E3 /* Assets.xcassets */,
 				2F2FFB731FCA4C8E005A36E3 /* LaunchScreen.storyboard */,
 				2F2FFB761FCA4C8E005A36E3 /* Info.plist */,
+				2F9C98C51FCD39EB00BE8DC0 /* watch_custom WatchKit App-Bridging-Header.h */,
 			);
 			path = watch_custom;
 			sourceTree = "<group>";
@@ -260,6 +268,7 @@
 		2F2FFB931FCA4C8E005A36E3 /* watch_custom WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				2F9C98C31FCD397500BE8DC0 /* watch_custom WatchKit App.entitlements */,
 				2F2FFB941FCA4C8E005A36E3 /* Interface.storyboard */,
 				2F2FFB971FCA4C8E005A36E3 /* Assets.xcassets */,
 				2F2FFB991FCA4C8E005A36E3 /* Info.plist */,
@@ -270,7 +279,9 @@
 		2F2FFBA21FCA4C8E005A36E3 /* watch_custom WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2F9C98C41FCD397E00BE8DC0 /* watch_custom WatchKit Extension.entitlements */,
 				2F2FFBA31FCA4C8E005A36E3 /* InterfaceController.swift */,
+				2F6A4E121FCBD335003469F8 /* rowController.swift */,
 				2F2FFBA51FCA4C8E005A36E3 /* ExtensionDelegate.swift */,
 				2F2FFBA71FCA4C8E005A36E3 /* NotificationController.swift */,
 				2F2FFBA91FCA4C8E005A36E3 /* Assets.xcassets */,
@@ -400,6 +411,11 @@
 					2F2FFB661FCA4C8E005A36E3 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					2F2FFB7A1FCA4C8E005A36E3 = {
 						CreatedOnToolsVersion = 9.1;
@@ -413,11 +429,22 @@
 					};
 					2F2FFB8E1FCA4C8E005A36E3 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					2F2FFB9D1FCA4C8E005A36E3 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -513,7 +540,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-watch_custom WatchKit Extension/Pods-watch_custom WatchKit Extension-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-watchOS3.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-watchOS/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -663,7 +690,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-watch_custom/Pods-watch_custom-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS11.1/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -753,6 +780,7 @@
 			files = (
 				2F2FFBA81FCA4C8E005A36E3 /* NotificationController.swift in Sources */,
 				2F2FFBA61FCA4C8E005A36E3 /* ExtensionDelegate.swift in Sources */,
+				2F6A4E131FCBD335003469F8 /* rowController.swift in Sources */,
 				2F2FFBA41FCA4C8E005A36E3 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,11 +950,15 @@
 			baseConfigurationReference = F41090FC7806CDED66C988B6 /* Pods-watch_custom WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "watch_custom WatchKit Extension/watch_custom WatchKit Extension.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ARR993M2C;
 				INFOPLIST_FILE = "watch_custom WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arotem.watch-custom.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -940,11 +972,15 @@
 			baseConfigurationReference = BA1DF6B6C13CD9FEE416CE58 /* Pods-watch_custom WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "watch_custom WatchKit Extension/watch_custom WatchKit Extension.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ARR993M2C;
 				INFOPLIST_FILE = "watch_custom WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arotem.watch-custom.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -959,13 +995,19 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "watch_custom WatchKit App/watch_custom WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ARR993M2C;
 				IBSC_MODULE = watch_custom_WatchKit_Extension;
 				INFOPLIST_FILE = "watch_custom WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arotem.watch-custom.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "watch_custom/watch_custom WatchKit App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.1;
@@ -978,13 +1020,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "watch_custom WatchKit App/watch_custom WatchKit App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ARR993M2C;
 				IBSC_MODULE = watch_custom_WatchKit_Extension;
 				INFOPLIST_FILE = "watch_custom WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arotem.watch-custom.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "watch_custom/watch_custom WatchKit App-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.1;
@@ -996,7 +1043,9 @@
 			baseConfigurationReference = EA69C84D8945645EBACC5CDA /* Pods-watch_custom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = watch_custom/watch_custom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ARR993M2C;
 				INFOPLIST_FILE = watch_custom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arotem.watch-custom";
@@ -1011,7 +1060,9 @@
 			baseConfigurationReference = C7D2DEC5C156F040ED9EC072 /* Pods-watch_custom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = watch_custom/watch_custom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5ARR993M2C;
 				INFOPLIST_FILE = watch_custom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arotem.watch-custom";

@@ -18,18 +18,55 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("session activated")
     }
+
+
     
-    public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+    /*
+        Runs when user data is received from iphone
+    */
+    public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         print(" received")
-        if let tmp = applicationContext["key"] {
+        if let tmp = applicationContext["key"] as? [String]{
             print(tmp)
+            
+            self.localDefault = tmp
+            let myDefaults = UserDefaults(suiteName:
+                "group.com.arotem.watch-custom")
+            myDefaults?.set(self.localDefault, forKey:"coins")
+            print(self.localDefault)
+            getAllData()
         } else {
             print("no application context for key")
         }
-
     }
+    
+    /*
+        Converts the received userDefault from iPhone into an array with each index being a token
+        Run in the didReceiveAppContext class
+    */
+    func convertToArray(s:[String]) -> [String]{
+        var arr = [String]()
+        var str = ""
+        for char in s[0]{
+            if char == "," {
+                arr.append(str)
+                str = ""
+            }else if char != " " {
+                str += String(char)
+            }
+
+        }
+        arr.append(str)
+        return arr
         
-        
+    }
+    
+    func getData(str : Any){
+        dataArray = str
+        print(dataArray)
+    }
+    
+    var dataArray: Any = ""
     var session: WCSession!
     @IBOutlet var tableOutlet: WKInterfaceTable!
     
@@ -37,18 +74,21 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var cryptoPrices = [(String, String)]()
     //symbols for the coins to display: TODO: user data, pull this from else where in the app file structure
     var symbols = ["ETH", "BTC", "NEO", "POWR", "LTC"]
-    
+    var localDefault = [String]()
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
         //defaults stuff
         let myDefaults = UserDefaults(suiteName:
             "group.com.arotem.watch-custom")
-        guard let x = myDefaults?.object(forKey: "coins") else {
+        guard let x = myDefaults?.array(forKey: "coins") else {
             print("error")
             return
         }
-        print(x)
+        self.localDefault = x as! [String]
+        print(self.localDefault)
+        
+        
     }
     
     
@@ -68,18 +108,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
     }
     
-    /* **DEPRECATED**
-     Wrapper function to get prices of coins
-     */
-    func getPrices() {
-        cryptoPrices.removeAll()
-        getJSON(tick: "ethereum")
-        getJSON(tick: "neo")
-        getJSON(tick: "bitcoin")
-        getJSON(tick: "litecoin")
-        getJSON(tick: "power-ledger")
-    }
-    
     /*
      Gets run every time 
      */
@@ -90,7 +118,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             self.session.activate();
         }
         super.willActivate()
-        
+        getAllData()
     }
     
     override func didDeactivate() {
@@ -134,7 +162,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 
                 //solves the problem of multiple requests adding to the array
                 self.cryptoPrices.removeAll()
-                for s in self.symbols {
+                for s in self.localDefault {
                 let filteredArray = object.filter{$0["symbol"]! as! String == s}
                     guard let t = filteredArray.first?["price_usd"] else {
                         print("Not found")
@@ -154,9 +182,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
      */
     func getUsd(temp: String, sym: String) {
         cryptoPrices.append((sym, temp))
-        for element in cryptoPrices {
-            print(element)
-        }
     }
     
     

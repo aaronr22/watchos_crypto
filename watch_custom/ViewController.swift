@@ -26,6 +26,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                         print("error")
                         return
                     }
+            print(x)
             do {
             var t = ["BTC", "NEO"]
             print("sending")
@@ -39,6 +40,8 @@ class ViewController: UIViewController, WCSessionDelegate {
             print("watch not ready")
         }
     }
+
+    
     func sessionDidBecomeInactive(_ session: WCSession) {
         print("inactive")
     }
@@ -56,7 +59,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     var session: WCSession!
     var cryptoPrices = [(String, String)]()
     //symbols for the coins to display: TODO: user data, pull this from else where in the app file structure
-    var symbols = ["ETH", "BTC", "NEO", "POWR", "LTC"]
+    var symbols = ["ETH", "BTC", "NEO", "POWR", "LTC", "XRP"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,13 +71,17 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
         
         //persistent data
-//        let myDefaults = UserDefaults(suiteName:
-//            "group.com.arotem.watch-custom")
-//        guard let x = myDefaults?.array(forKey: "coins") else {
-//            print("error")
-//            return
-//        }
-//        print(x)
+        let myDefaults = UserDefaults(suiteName:
+            "group.com.arotem.watch-custom")
+        
+        //if
+        let t = ["NEO", "BTC", "ETH", "XRP", "POWR"]
+        myDefaults?.set(t, forKey:"coins")
+        guard let x = myDefaults?.array(forKey: "coins") else {
+            print("error")
+            return
+        }
+        print(x)
         
         //getAllData()
     }

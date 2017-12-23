@@ -11,7 +11,17 @@ import Alamofire
 class CoinTableViewController: UITableViewController {
     //MARK: properties
     var coins = [Coin]()
-    
+    var onFave = false
+    @IBAction func favoritesButton(_ sender: Any) {
+        //TODO: implement
+        if onFave == false {
+            loadFavoriteCoins()
+        } else {
+            loadCoins()
+        }
+        //loadFavorites
+        print("pressed button")
+    }
     @IBOutlet var tableview: UITableView!
     //MARK: private methods
     
@@ -33,11 +43,29 @@ class CoinTableViewController: UITableViewController {
     }
     
     /*
+        Loads the favorite coins from the userdefaults
+        updates coins -> filter coins array with just the desired values
+     
+    */
+    private func loadFavoriteCoins(){
+        //TODO: implement
+        self.onFave = true
+        //take code from viewcontroller for user defaults
+        
+        //filter coins to just have the desired coins
+        
+        //refresh the table
+        tableview.reloadData()
+    }
+    
+    
+    /*
         Pulls the actual coin data from coinmarketcap.com
         then parses each coin into Coin
         the problem is the rest reqest is recieved after the table loaded its data.  tutorial im working on should solve that
      */
     private func loadCoins(){
+        self.onFave = false
         
         Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", encoding: JSONEncoding.default).responseJSON {
             response in if let object = response.result.value as? [Dictionary<String,AnyObject>] {

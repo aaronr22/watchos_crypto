@@ -17,6 +17,18 @@ class ViewController: UIViewController, WCSessionDelegate {
         print("Activate")
     }
     
+    @IBOutlet weak var phoneTable: UITableView!
+    
+    func loadCoins(){
+        let coins = ["a", "b"]
+        //phoneTable.setNumberOfRows(coins.count, withRowType "row")
+//        for i in 0..<coins.count {
+//            let row = phoneTable.CoinTableViewCell(at:i) as? CoinTableViewCell
+//            let lbl1 = coins[i]
+//            row?.symLabel.setText(lbl1)
+//        }
+    }
+    
     @IBOutlet weak var sentLbl: UILabel!
     @IBAction func sendDataBtn(_ sender: Any) {
         if sessionReachabilityDidChange(session) {

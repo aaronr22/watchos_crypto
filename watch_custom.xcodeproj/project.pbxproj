@@ -23,6 +23,9 @@
 		2F2FFBA81FCA4C8E005A36E3 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FFBA71FCA4C8E005A36E3 /* NotificationController.swift */; };
 		2F2FFBAA1FCA4C8E005A36E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2FFBA91FCA4C8E005A36E3 /* Assets.xcassets */; };
 		2F6A4E131FCBD335003469F8 /* rowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6A4E121FCBD335003469F8 /* rowController.swift */; };
+		2FB1556C1FEB8A630057E49D /* CoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1556B1FEB8A630057E49D /* CoinTableViewCell.swift */; };
+		2FB1556E1FEB8CA50057E49D /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1556D1FEB8CA40057E49D /* Coin.swift */; };
+		2FB155701FEB8D5E0057E49D /* CoinTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB1556F1FEB8D5E0057E49D /* CoinTableViewController.swift */; };
 		440828C23C1B705E2BB6A124 /* Pods_watch_custom_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 018587E4697710FC7D77569B /* Pods_watch_custom_WatchKit_Extension.framework */; };
 		533094CC00F51ACCD76BB05B /* Pods_watch_custom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE6FEDC0CFFE79C9EDEF39B /* Pods_watch_custom.framework */; };
 		710968780882B91B005F60DB /* Pods_watch_customUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF31F39899439CF2EF31537 /* Pods_watch_customUITests.framework */; };
@@ -119,6 +122,9 @@
 		2F9C98C31FCD397500BE8DC0 /* watch_custom WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watch_custom WatchKit App.entitlements"; sourceTree = "<group>"; };
 		2F9C98C41FCD397E00BE8DC0 /* watch_custom WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watch_custom WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		2F9C98C51FCD39EB00BE8DC0 /* watch_custom WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watch_custom WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
+		2FB1556B1FEB8A630057E49D /* CoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewCell.swift; sourceTree = "<group>"; };
+		2FB1556D1FEB8CA40057E49D /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		2FB1556F1FEB8D5E0057E49D /* CoinTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewController.swift; sourceTree = "<group>"; };
 		307377BC9C7AC722E52E52D0 /* Pods_watch_customTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watch_customTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD16D604544E25963D757D9 /* Pods_watch_custom_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watch_custom_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A019C5007E40E0262E3CDB06 /* Pods-watch_customUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watch_customUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-watch_customUITests/Pods-watch_customUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +245,9 @@
 				2F2FFB6A1FCA4C8E005A36E3 /* AppDelegate.swift */,
 				2F2FFB6C1FCA4C8E005A36E3 /* ViewController.swift */,
 				2F2FFB6E1FCA4C8E005A36E3 /* Main.storyboard */,
+				2FB1556D1FEB8CA40057E49D /* Coin.swift */,
+				2FB1556F1FEB8D5E0057E49D /* CoinTableViewController.swift */,
+				2FB1556B1FEB8A630057E49D /* CoinTableViewCell.swift */,
 				2F2FFB711FCA4C8E005A36E3 /* Assets.xcassets */,
 				2F2FFB731FCA4C8E005A36E3 /* LaunchScreen.storyboard */,
 				2F2FFB761FCA4C8E005A36E3 /* Info.plist */,
@@ -753,7 +762,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FB155701FEB8D5E0057E49D /* CoinTableViewController.swift in Sources */,
+				2FB1556C1FEB8A630057E49D /* CoinTableViewCell.swift in Sources */,
 				2F2FFB6D1FCA4C8E005A36E3 /* ViewController.swift in Sources */,
+				2FB1556E1FEB8CA50057E49D /* Coin.swift in Sources */,
 				2F2FFB6B1FCA4C8E005A36E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -53,6 +53,9 @@
                             <outlet property="delegate" destination="Rd7-3n-Qru" id="hIM-1D-ILM"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="tableview" destination="uiQ-yk-zvW" id="vgp-oI-ojh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2O-Ts-RMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

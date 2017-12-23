@@ -12,6 +12,7 @@ class CoinTableViewController: UITableViewController {
     //MARK: properties
     var coins = [Coin]()
     
+    @IBOutlet var tableview: UITableView!
     //MARK: private methods
     
         /*
@@ -54,17 +55,21 @@ class CoinTableViewController: UITableViewController {
                     guard let c = Coin(symbol: x, price: y) else {
                         fatalError("Could not convert token to coin")
                     }
+                    print(c.symbol)
                     self.coins += [c]
                 }
             }
+            print("reloading table")
+            self.tableview.reloadData()
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSampleCoins()
-
-        //loadCoins()
+        //loadSampleCoins()
+        print("laoding coins")
+        loadCoins()
 
     }
 

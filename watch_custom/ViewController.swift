@@ -1,4 +1,4 @@
-//
+//THIS FILE IS THE FILE FOR THE FUNCTIONALITY OF THE VIEW ON THE RIGHT IN MAIN.STORYBOARD
 //  ViewController.swift
 //  watch_custom
 //
@@ -6,7 +6,9 @@
 //  Copyright © 2017 Aaron Rotem. All rights reserved.
 //TODO: 1. Display every token and price in a table
 //      2. Swipe right on a row to add that token to favorites
-//      3. Allow them to view favorites in the app easily 
+//      3. Allow them to view favorites in the app easily
+
+//this file works to pull the persistent data from defaults and then sends that to the watch
 
 import UIKit
 import Alamofire
@@ -18,30 +20,26 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
     
     @IBOutlet weak var phoneTable: UITableView!
-    
-    func loadCoins(){
-        let coins = ["a", "b"]
-        //phoneTable.setNumberOfRows(coins.count, withRowType "row")
-//        for i in 0..<coins.count {
-//            let row = phoneTable.CoinTableViewCell(at:i) as? CoinTableViewCell
-//            let lbl1 = coins[i]
-//            row?.symLabel.setText(lbl1)
-//        }
-    }
-    
     @IBOutlet weak var sentLbl: UILabel!
+    //action for sending the favorites to the watch for it to display
     @IBAction func sendDataBtn(_ sender: Any) {
+        
+        
         if sessionReachabilityDidChange(session) {
+                    //gets all persistant data from UserDefaults
                     let myDefaults = UserDefaults(suiteName:
                         "group.com.arotem.watch-custom")
+            
+                    //gets the 'coins' key from the defaults
                     guard let x = myDefaults?.array(forKey: "coins") else {
                         print("error")
                         return
                     }
             print(x)
             do {
-            var t = ["BTC", "NEO"]
+            
             print("sending")
+                //send the favorites to the watch
             try 
                 session.updateApplicationContext(["key": x])
             self.sentLbl.text="sent"
@@ -69,13 +67,10 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
     
     var session: WCSession!
-    var cryptoPrices = [(String, String)]()
-    //symbols for the coins to display: TODO: user data, pull this from else where in the app file structure
-    var symbols = ["ETH", "BTC", "NEO", "POWR", "LTC", "XRP"]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //communication between watch and app
+        //communication between watch and iOS app
         if WCSession.isSupported() {
             session = WCSession.default
             session.delegate = self
@@ -86,45 +81,24 @@ class ViewController: UIViewController, WCSessionDelegate {
         let myDefaults = UserDefaults(suiteName:
             "group.com.arotem.watch-custom")
         
-        //if
+        //setting the persistant data
+        
+        //TODO: have the user set these from within the iOS app(one of the later steps)
+        //t is the sample set of user fav because its not implemented
         let t = ["NEO", "BTC", "ETH", "XRP", "POWR"]
+        //set the userdefaults
         myDefaults?.set(t, forKey:"coins")
         guard let x = myDefaults?.array(forKey: "coins") else {
             print("error")
             return
         }
         print(x)
-        
-        //getAllData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func getAllData(){
-        Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", encoding: JSONEncoding.default).responseJSON {
-            response in if let object = response.result.value as? [Dictionary<String,AnyObject>] {
-                
-                print(object)
-                //solves the problem of multiple requests adding to the array
-                //self.cryptoPrices.removeAll()
-//                for s in self.symbols {
-//                    let filteredArray = object.filter{$0["symbol"]! as! String == s}
-//                    guard let t = filteredArray.first?["price_usd"] else {
-//                        print("Not found")
-//                        return
-//                    }
-//                    print(t)
-//                    //self.getUsd(temp: t as! String, sym: s)
-//                }
-                //self.loadTableCrypto()
-            }
-        }
-        
-    }
-
 
 }
 

@@ -13,6 +13,10 @@ class CoinTableViewController: UITableViewController {
     var coins = [Coin]()
     
     //MARK: private methods
+    
+        /*
+            Loads sample coins to put into the table
+        */
     private func loadSampleCoins(){
         guard let coin1 = Coin(symbol: "XRP", price: "93") else {
             fatalError("Unable to laod coin1")
@@ -27,13 +31,17 @@ class CoinTableViewController: UITableViewController {
         
     }
     
-    //load the real coins and add them to the coins array
-    //then change viewDidLoad to call this coins instead
+    /*
+        Pulls the actual coin data from coinmarketcap.com
+        then parses each coin into Coin
+        the problem is the rest reqest is recieved after the table loaded its data.  tutorial im working on should solve that
+     */
     private func loadCoins(){
         
         Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", encoding: JSONEncoding.default).responseJSON {
             response in if let object = response.result.value as? [Dictionary<String,AnyObject>] {
                 for coin in object{
+                    //need this guard syntax for optional variables, essentially variables that sometimes might not be there
                     guard let x = coin["symbol"] as? String else {
                         fatalError("no symbol")
                     }
@@ -41,13 +49,13 @@ class CoinTableViewController: UITableViewController {
                         fatalError("no price")
                     }
                     //print("\(x) price: \(y)")
-                    //instead of printing, create a new coin and then add it to the array
+                    
+                    //creates the new coin
                     guard let c = Coin(symbol: x, price: y) else {
                         fatalError("Could not convert token to coin")
                     }
                     self.coins += [c]
                 }
-                print("ah")
             }
         }
     }
@@ -75,6 +83,7 @@ class CoinTableViewController: UITableViewController {
         return coins.count
     }
     
+    //load the table with data.  im not sure how to call this from the end of loadCoins, that would probably solve the problem though.  tutorial will fix that though
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "CoinTableViewCell"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CoinTableViewCell else {

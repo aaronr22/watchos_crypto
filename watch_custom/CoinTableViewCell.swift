@@ -12,6 +12,7 @@ class CoinTableViewCell: UITableViewCell {
     //MARK: properties
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var changelLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

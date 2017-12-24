@@ -11,13 +11,15 @@ class Coin {
     //MARK: properties
     var symbol: String
     var price: String
+    var change: String
     
     //MARK: initialization
-    init?(symbol: String, price: String){
-        if symbol.isEmpty || price.isEmpty {
+    init?(symbol: String, price: String, change: String){
+        if symbol.isEmpty || price.isEmpty || change.isEmpty {
             return nil
         }
         self.symbol = symbol
         self.price = price
+        self.change = change
     }
 }

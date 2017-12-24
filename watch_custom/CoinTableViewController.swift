@@ -46,13 +46,13 @@ class CoinTableViewController: UITableViewController, WCSessionDelegate {
             Loads sample coins to put into the table
         */
     private func loadSampleCoins(){
-        guard let coin1 = Coin(symbol: "XRP", price: "93") else {
+        guard let coin1 = Coin(symbol: "XRP", price: "93", change: "5") else {
             fatalError("Unable to laod coin1")
         }
-        guard let coin2 = Coin(symbol: "BTC", price: "16000") else {
+        guard let coin2 = Coin(symbol: "BTC", price: "16000", change: "5") else {
             fatalError("Unable to laod coin1")
         }
-        guard let coin3 = Coin(symbol: "LTC", price: "308") else {
+        guard let coin3 = Coin(symbol: "LTC", price: "308", change: "5") else {
             fatalError("Unable to laod coin1")
         }
         coins += [coin1, coin2, coin3]
@@ -137,10 +137,13 @@ class CoinTableViewController: UITableViewController, WCSessionDelegate {
                     guard let y = coin["price_usd"] as? String else {
                         fatalError("no price")
                     }
+                    guard let z = coin["percent_change_24h"] as? String else {
+                        fatalError("no daily change")
+                    }
                     //print("\(x) price: \(y)")
                     
                     //creates the new coin
-                    guard let c = Coin(symbol: x, price: y) else {
+                    guard let c = Coin(symbol: x, price: y, change: z) else {
                         fatalError("Could not convert token to coin")
                     }
                     self.coins += [c]
@@ -202,8 +205,16 @@ class CoinTableViewController: UITableViewController, WCSessionDelegate {
         }
         let coin = coins[indexPath.row]
         cell.symbolLabel.text = coin.symbol
-        cell.priceLabel.text = coin.price
+        cell.priceLabel.text = "$" + coin.price
+        cell.changelLabel.text = coin.change + "%"
+        //TODO: if the first character of the change var is negative, set color to red.  otherwise set it to green
         
+        let index = coin.change.characters.index(coin.change.startIndex, offsetBy: 0)
+        if coin.change[index] == "-" {
+            cell.changelLabel.textColor = UIColor.red
+        } else {
+            cell.changelLabel.textColor = UIColor.green
+        }
         return cell
     }
 

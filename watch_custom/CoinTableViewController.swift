@@ -169,7 +169,86 @@ class CoinTableViewController: UITableViewController {
     }
 
     //swipe feature
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
+        let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
+        return swipeConfig
+    }
     
-    
-
+    //method that occurs when the swipe happens
+    func contextualDeleteAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
+        if self.onFave == true {
+            let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+                print("deleting")
+                
+                print("Symbol to remove: \(self.coins[indexPath.row].symbol)")
+                let myDefaults = UserDefaults(suiteName:
+                    "group.com.arotem.watch-custom")
+                
+                //gets the 'coins' key from the defaults
+                guard let x = myDefaults?.array(forKey: "coins") as? [String] else {
+                    print("error")
+                    return
+                }
+                
+                //find index of self.coins[indexPath.row].symbol
+                var index = x.index(of: self.coins[indexPath.row].symbol)
+                //set x to a mutable array
+                print("old defaults: \(x)")
+                var tmp = x
+                //remove index from two steps previous
+                tmp.remove(at: index!)
+                
+                //set userdefaults to new array
+                myDefaults?.set(tmp, forKey:"coins")
+                guard let y = myDefaults?.array(forKey: "coins") else {
+                    print("error")
+                    return
+                }
+                print(x)
+                print("new defaults: \(y)")
+                //TODO: send to watch
+                
+                self.coins.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .left)
+                //remove from defaults then send defaults to watch
+                
+                completionHandler(true)
+            }
+                    return action
+        } else {
+            let action = UIContextualAction(style: .normal, title: "Add") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+                print("adding to defaults")
+                //remove next two lines, replace with adding to defaults code, then send to watch
+                print("Symbol to add: \(self.coins[indexPath.row].symbol)")
+                let myDefaults = UserDefaults(suiteName:
+                    "group.com.arotem.watch-custom")
+                
+                //gets the 'coins' key from the defaults
+                guard let x = myDefaults?.array(forKey: "coins") as? [String] else {
+                    print("error")
+                    return
+                }
+                if !x.contains(self.coins[indexPath.row].symbol) {
+                print("Old defaults: \(x)")
+                var t = x
+                
+                t.append(self.coins[indexPath.row].symbol)
+                myDefaults?.set(t,  forKey: "coins")
+                guard let y = myDefaults?.array(forKey: "coins") as? [String] else {
+                    print("error")
+                    return
+                }
+                print("New defaults: \(y)")
+                } else {
+                    print("already in defaults")
+                }
+                
+                //TODO: send to watch
+                
+                completionHandler(true)
+            }
+            return action
+        }
+    }
 }

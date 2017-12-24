@@ -11,16 +11,18 @@ import Alamofire
 class CoinTableViewController: UITableViewController {
     //MARK: properties
     var coins = [Coin]()
+    var coinStore = [Coin]()
+    //controls the state of the favorites/all coins list
     var onFave = false
-    @IBAction func favoritesButton(_ sender: Any) {
+    @IBAction func favoritesButton(_ sender: UIButton) {
         //TODO: implement
         if onFave == false {
             loadFavoriteCoins()
+            sender.setTitle("All Currencies", for: .normal)
         } else {
-            loadCoins()
+            loadCoinsTwo()
+            sender.setTitle("My Favorites", for: .normal)
         }
-        //loadFavorites
-        print("pressed button")
     }
     @IBOutlet var tableview: UITableView!
     //MARK: private methods
@@ -44,27 +46,61 @@ class CoinTableViewController: UITableViewController {
     
     /*
         Loads the favorite coins from the userdefaults
-        updates coins -> filter coins array with just the desired values
-     
     */
     private func loadFavoriteCoins(){
-        //TODO: implement
+        //saves the coins as another array
+        self.coinStore = self.coins
+        print("loading favorite coins...")
+        
         self.onFave = true
-        //take code from viewcontroller for user defaults
+        //gets the user defalts
+        let myDefaults = UserDefaults(suiteName:
+            "group.com.arotem.watch-custom")
         
-        //filter coins to just have the desired coins
+        //gets the 'coins' key from the defaults
+        guard let x = myDefaults?.array(forKey: "coins") as? [String] else {
+            print("error")
+            return
+        }
         
+        //filters the coins down to favorite coins
+        var tmpArray = [Coin]()
+        tmpArray.removeAll()
+        for c in x {
+            for t in coins {
+                if (t.symbol == c) {
+                    tmpArray.append(t)
+                }
+            }
+        }
+        
+        //sets the coins array to the new fave coins array
+        self.coins = tmpArray
+        //print("fave coins: \(self.coins)")
         //refresh the table
         tableview.reloadData()
     }
     
+    /*
+        resets the coins array to be all the coins not just favorites
+    */
+    private func loadCoinsTwo() {
+        self.onFave = false
+        self.coins = self.coinStore
+        self.tableview.reloadData()
+    }
+    
+    
     
     /*
-        Pulls the actual coin data from coinmarketcap.com
-        then parses each coin into Coin
-        the problem is the rest reqest is recieved after the table loaded its data.  tutorial im working on should solve that
+        Loads the coins initially, but only once
+        Pulls the actual coin data from coinmarketcap.com then adds it to the tableview
      */
     private func loadCoins(){
+        print("loading coins...")
+        if coins.count < coinStore.count{
+            coins = coinStore
+        }
         self.onFave = false
         
         Alamofire.request("https://api.coinmarketcap.com/v1/ticker/", encoding: JSONEncoding.default).responseJSON {
@@ -83,20 +119,23 @@ class CoinTableViewController: UITableViewController {
                     guard let c = Coin(symbol: x, price: y) else {
                         fatalError("Could not convert token to coin")
                     }
-                    print(c.symbol)
                     self.coins += [c]
                 }
             }
-            print("reloading table")
+            //print("all coins: \(self.coins)")
             self.tableview.reloadData()
         }
         
     }
     
+    /*
+        Runs when the app is loaded
+        Loads all coins first
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         //loadSampleCoins()
-        print("laoding coins")
+        print("coins: \(coins)")
         loadCoins()
 
     }
@@ -129,6 +168,8 @@ class CoinTableViewController: UITableViewController {
         return cell
     }
 
+    //swipe feature
+    
     
 
 }

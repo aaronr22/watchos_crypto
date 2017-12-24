@@ -8,10 +8,25 @@
 
 import UIKit
 import Alamofire
-class CoinTableViewController: UITableViewController {
+import WatchConnectivity
+
+class CoinTableViewController: UITableViewController, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("watch activated")
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("inactive")
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        print("active again")
+    }
+    
     //MARK: properties
     var coins = [Coin]()
     var coinStore = [Coin]()
+    var session: WCSession!
     //controls the state of the favorites/all coins list
     var onFave = false
     @IBAction func favoritesButton(_ sender: UIButton) {
@@ -134,6 +149,12 @@ class CoinTableViewController: UITableViewController {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
+        
         //loadSampleCoins()
         print("coins: \(coins)")
         loadCoins()
@@ -169,6 +190,7 @@ class CoinTableViewController: UITableViewController {
     }
 
     //swipe feature
+    //TODO: limit swipe to only swipe from left
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
         let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
@@ -176,6 +198,7 @@ class CoinTableViewController: UITableViewController {
     }
     
     //method that occurs when the swipe happens
+    
     func contextualDeleteAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         if self.onFave == true {
             let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
@@ -208,7 +231,17 @@ class CoinTableViewController: UITableViewController {
                 print(x)
                 print("new defaults: \(y)")
                 //TODO: send to watch
-                
+                if self.sessionReachabilityDidChange(self.session) {
+                    do {
+                        try
+                            self.session.updateApplicationContext(["key": y])
+                        print("sent")
+                    } catch {
+                        print("error sending to watch")
+                    }
+                }else {
+                    print("watch not ready")
+                }
                 self.coins.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .left)
                 //remove from defaults then send defaults to watch
@@ -240,6 +273,17 @@ class CoinTableViewController: UITableViewController {
                     return
                 }
                 print("New defaults: \(y)")
+                    if self.sessionReachabilityDidChange(self.session) {
+                        do {
+                            try
+                                self.session.updateApplicationContext(["key": y])
+                            print("sent")
+                        } catch {
+                            print("error sending to watch")
+                        }
+                    }else {
+                        print("watch not ready")
+                    }
                 } else {
                     print("already in defaults")
                 }
@@ -250,5 +294,12 @@ class CoinTableViewController: UITableViewController {
             }
             return action
         }
+    }
+    
+    //MARK: functions to send data to watch
+    private func sessionReachabilityDidChange(_ session: WCSession) -> Bool {
+        print("Is reachable: ", terminator: "")
+        print(session.isReachable ? "yes" : "no")
+        return session.isReachable
     }
 }

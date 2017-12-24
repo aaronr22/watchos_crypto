@@ -71,6 +71,15 @@ class CoinTableViewController: UITableViewController, WCSessionDelegate {
         //gets the user defalts
         let myDefaults = UserDefaults(suiteName:
             "group.com.arotem.watch-custom")
+//        guard let test = myDefaults else {
+//            print("could not get defualts")
+//            return
+//        }
+//        print(test)
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            print("\(key) = \(value) \n")
+        }
+        
         
         //gets the 'coins' key from the defaults
         guard let x = myDefaults?.array(forKey: "coins") as? [String] else {
@@ -149,6 +158,15 @@ class CoinTableViewController: UITableViewController, WCSessionDelegate {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        let myDefaults = UserDefaults(suiteName:
+            "group.com.arotem.watch-custom")
+        
+        //guard statement not tested.  should only reset the defualts to base case array when it cannot pull
+        guard let x = myDefaults?.array(forKey: "coins") as? [String] else {
+        var tmp = ["ETH", "BTC", "LTC"]
+        myDefaults?.set(tmp, forKey:"coins")
+        return
+        }
         if WCSession.isSupported() {
             session = WCSession.default
             session.delegate = self
